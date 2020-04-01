@@ -2,29 +2,30 @@ ROADMAP
 =======
 
 ## Employee: Select user
-- [ ] MUST : As a user, I choose my name from a list. Myname is already pre-selected on my nextvisit (cookie) 
-and I can save myself this stepin the future.
+- [x] MUST : As a user, I choose my name from a list.
+- [ ] MUST : My name is already pre-selected on my nextvisit (cookie) and I can save myself this stepin the future.
 - [ ] COULD : I can log in with my user name and password and remain logged in on this device.
 
 ## Admin: user list
-- [ ] MUST : An admin user can manage the list of names via CRUD.
+- [x] MUST : An admin user can manage the list of names via CRUD.
 
 ## User: enter date 
-- [ ] MUST : I can enter a date. Today is preselected. 
+- [x] MUST : I can enter a date. 
+- [ ] MUST : Today is preselected. 
 - [ ] COULD : I can select the date with a datepicker.
 - [ ] COULD : I see the respective weekday as an abbreviation (Mon, Tue,...)
 - [ ] COULD : I have a "minus" button that selects the previous day.
 
 ## User: Select project
-- [ ] MUST : I can choose a project that I've worked on from a list.
+- [x] MUST : I can choose a project that I've worked on from a list.
 - [ ] COULD : The project for which I last recorded time is already preselected.
 
 # Admin: project list
- - [ ] MUST : An admin user can manage the project list via CRUD.
+ - [x] MUST : An admin user can manage the project list via CRUD.
 
 # User: enter time
-- [ ] MUST : I can enter the project time in an input field.
-It automatically detects whether it is hours and/or minutes. 
+- [x] MUST : I can enter the project time in an input field.
+- [ ] It automatically detects whether it is hours and/or minutes : 
 After I leave the field (onblur), my input is automatically formatted as hh:mm.
 Examples: 2 02:00, 8.5 08:30, 15 00:15, 150 02:30
 Assumption: Number >10 is minutes, <=10 are hours
@@ -33,13 +34,13 @@ Assumption: Number >10 is minutes, <=10 are hours
 - [ ] MUST : I can easily switch between the different input fields.
 
 # User: enter comment
-- [ ] MUST : I can enter an optional comment in a text field.
+- [x] MUST : I can enter an optional comment in a text field.
 
 # User: save entry
-- [ ] MUST : I can save my input by clicking a button.
+- [x] MUST : I can save my input by clicking a button.
 
 # User: read/edit/delete
-- [ ] MUST : I see a list of time entries which I have created. 
+- [x] MUST : I see a list of time entries which I have created. 
 - [ ] MUST : I can delete individual entries.
 - [ ] COULD : I can edit individual entries.
 
@@ -49,8 +50,8 @@ Assumption: Number >10 is minutes, <=10 are hours
 - [ ] COULD : I can filter the list by project.
 
 # Admin: see all user time records 
-- [ ] MUST : An admin user sees all recorded times of all employees.
+- [x] MUST : An admin user sees all recorded times of all employees.
 - [ ] COULD : The admin user can also filter by employees.
 
 # Meta: Code repository 
-- [ ] MUST : The project is handed over in a git repository.
+- [x] MUST : The project is handed over in a git repository.

@@ -14,6 +14,7 @@ class Project(models.Model):
 
 class TimeEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     date = models.DateField('work on date', default=timezone.now)
     duration = models.IntegerField('work duration in seconds', default=0)
     comment = models.TextField('optionnal comment', default="")
