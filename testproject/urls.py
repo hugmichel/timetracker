@@ -24,5 +24,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='timetracker/login.html')),
     path('logout/', auth_views.LogoutView.as_view(template_name='timetracker/logout.html')),
     path('', views.IndexView.as_view(), name='index'),
-    path('add/', views.TimeEntryCreateView.as_view(), name='form'),
+    path('add/', views.TimeEntryCreateView.as_view(), name='add'),
+    path('remove/<int:time_entry_id>', views.remove_time_entry, name='remove'),
 ]

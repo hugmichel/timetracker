@@ -31,7 +31,7 @@ Examples: 2 02:00, 8.5 08:30, 15 00:15, 150 02:30
 Assumption: Number >10 is minutes, <=10 are hours
 
 # User: Usability
-- [ ] MUST : I can easily switch between the different input fields.
+- [?] MUST : I can easily switch between the different input fields.
 
 # User: enter comment
 - [x] MUST : I can enter an optional comment in a text field.
@@ -41,7 +41,7 @@ Assumption: Number >10 is minutes, <=10 are hours
 
 # User: read/edit/delete
 - [x] MUST : I see a list of time entries which I have created. 
-- [ ] MUST : I can delete individual entries.
+- [x] MUST : I can delete individual entries.
 - [ ] COULD : I can edit individual entries.
 
 # User: my total time

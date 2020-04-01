@@ -1,3 +1,6 @@
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 from django.views.generic import CreateView, FormView
@@ -35,3 +38,9 @@ class TimeEntryCreateView(FormView):
     def form_valid(self, form):
         form.save_timeentry()
         return super().form_valid(form)
+
+
+def remove_time_entry(request, time_entry_id):
+    time_entry = get_object_or_404(TimeEntry, pk=time_entry_id)  # , user=request.user
+    time_entry.delete()
+    return HttpResponseRedirect(reverse('index'))

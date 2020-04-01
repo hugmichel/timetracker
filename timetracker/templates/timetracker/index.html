@@ -16,6 +16,7 @@
                     <th>Project</th>
                     <th>Duration in seconds</th>
                     <th>Comment</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,8 @@
                         <td>{{ timeentry.date }}</td>
                         <td>{{ timeentry.duration }}</td>
                         <td>{{ timeentry.comment }}</td>
+                        <td><a href="/remove/{{ timeentry.id }}"
+                               onclick="if (!confirm('confirm remove ?')) return false">Supprimer</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
