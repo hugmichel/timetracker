@@ -19,17 +19,33 @@ class IndexView(generic.ListView):
         user = None
         if self.request.user.is_authenticated:
             user = self.request.user
-        total = 0
+
+        time_entrys = TimeEntry.objects.filter(user=user)
 
         project_id = self.request.GET.get('project_id')
         if project_id and len(project_id) > 0:
             project_id = int(project_id)
-            time_entrys = TimeEntry.objects.filter(user=user, project_id=project_id)
-        else:
-            time_entrys = TimeEntry.objects.filter(user=user)
+            time_entrys = time_entrys.filter(project_id=project_id)
+
+        date_min = self.request.GET.get('date_min')
+        if date_min and len(date_min) > 0:
+            # date_min = (date_min)
+            time_entrys = time_entrys.filter(date__gte=date_min)
+
+        date_max = self.request.GET.get('date_max')
+        if date_max and len(date_max) > 0:
+            # date_max = (date_max)
+            time_entrys = time_entrys.filter(date__lte=date_max)
+
+        total = 0
         for time_entry in time_entrys:
             total += time_entry.duration
-        self.extra_context = {"total": total, "project_id": project_id, "projects": Project.objects.all()}
+
+        self.extra_context = {"total": total,
+                              "project_id": project_id,
+                              "date_min": date_min,
+                              "date_max": date_max,
+                              "projects": Project.objects.all()}
         return time_entrys.order_by('-id')
 
 

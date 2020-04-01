@@ -8,26 +8,42 @@
     <div class="py-5 bg-light">
         <div class="container">
             <form method="get" action="/" class="form-inline">
-                <div class="form-group">
+                <button type="submit" class="btn btn-primary mt-2 mr-4 ml-0">Filter by</button>
+                <div class="form-group mr-3">
                     <label for="select-project" class="mr-3">Projects</label>
-                    <select class="form-control my-1 mr-sm-2" id="select-project" name="project_id">
-                        <option value="">Select a project</option>
+                    <select class="form-control my-1 mr-sm-2" id="select-project" name="project_id" style="min-width: 150px">
+                        <option value="">none</option>
                         {% for project in projects %}
                             <option value="{{ project.id }}"
                                     {% if project.id == project_id %}selected{% endif %}>{{ project.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Filter</button>
+                <div class="form-group mr-4">
+                    <label for="select-project" class="mr-3">Date min</label>
+                    <vuejs-datepicker value="'{{ date_min }}'"
+                                      name="date_min"
+                                      bootstrap-styling
+                                      format="yyyy-MM-dd"
+                                      clear-button
+                    ></vuejs-datepicker>
+                </div>
+                <div class="form-group mr-4">
+                    <label for="select-project" class="mr-3">Date max</label>
+                    <vuejs-datepicker value="'{{ date_max }}'"
+                                      name="date_max"
+                                      bootstrap-styling
+                                      format="yyyy-MM-dd"
+                                      clear-button
+                    ></vuejs-datepicker>
+                </div>
             </form>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>User</th>
-                    <th>ID</th>
                     <th>Date</th>
                     <th>Project</th>
-                    <th>Duration</th>
+                    <th>Time</th>
                     <th>Comment</th>
                     <th>Actions</th>
                 </tr>
@@ -35,10 +51,8 @@
                 <tbody>
                 {% for timeentry in timeentrys %}
                     <tr>
-                        <td>{{ timeentry.user }}</td>
-                        <td>{{ timeentry.id }}</td>
-                        <td>{{ timeentry.project }}</td>
                         <td>{{ timeentry.date }}</td>
+                        <td>{{ timeentry.project }}</td>
                         <td>
                             <app-duration duration="{{ timeentry.duration }}"></app-duration>
                         </td>

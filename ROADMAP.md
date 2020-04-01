@@ -3,7 +3,7 @@ ROADMAP
 
 ## Employee: Select user
 - [x] MUST : As a user, I choose my name from a list.
-- [?] MUST : My name is already pre-selected on my nextvisit (cookie) and I can save myself this stepin the future.
+- [!] MUST : My name is already pre-selected on my nextvisit (cookie) and I can save myself this stepin the future.
 - [x] COULD : I can log in with my user name and password and remain logged in on this device.
 
 ## Admin: user list
@@ -31,7 +31,7 @@ Examples: 2 02:00, 8.5 08:30, 15 00:15, 150 02:30
 Assumption: Number >10 is minutes, <=10 are hours
 
 # User: Usability
-- [?] MUST : I can easily switch between the different input fields.
+- [!] MUST : I can easily switch between the different input fields.
 
 # User: enter comment
 - [x] MUST : I can enter an optional comment in a text field.
@@ -46,7 +46,7 @@ Assumption: Number >10 is minutes, <=10 are hours
 
 # User: my total time
 - [x] MUST : I see the sum of my recorded times at the bottom of the list.
-- [ ] COULD : I can filter the list by day, week, month and year.
+- [!] COULD : I can filter the list by day, week, month and year.
 - [x] COULD : I can filter the list by project.
 
 # Admin: see all user time records 
