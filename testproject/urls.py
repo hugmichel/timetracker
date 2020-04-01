@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 from timetracker import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(template_name='timetracker/login.html')),
+    path('logout/', auth_views.LogoutView.as_view(template_name='timetracker/logout.html')),
     path('', views.IndexView.as_view(), name='index'),
     path('add/', views.TimeEntryCreateView.as_view(), name='form'),
 ]

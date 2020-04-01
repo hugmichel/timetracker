@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.views import generic
 from django.views.generic import CreateView, FormView
 
@@ -10,13 +11,26 @@ class IndexView(generic.ListView):
     context_object_name = 'timeentrys'
 
     def get_queryset(self):
-        return TimeEntry.objects.filter(user=2)
+        user = None
+        if self.request.user.is_authenticated:
+            user = self.request.user
+        return TimeEntry.objects.filter(user=user).order_by('-id')
 
 
 class TimeEntryCreateView(FormView):
     template_name = 'timetracker/timeentry_form.html'
     form_class = TimeEntryForm
     success_url = '/'
+
+    def get_initial(self):
+        initial = super(TimeEntryCreateView, self).get_initial()
+        if self.request.user.is_authenticated:
+            initial.update({'user': self.request.user})
+            user_entries = TimeEntry.objects.filter(user=self.request.user).order_by('-id')
+            if len(user_entries) > 0:
+                initial.update({'project': user_entries[0].project})
+        initial.update({"date": timezone.now})
+        return initial
 
     def form_valid(self, form):
         form.save_timeentry()
