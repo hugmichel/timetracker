@@ -27,12 +27,17 @@
                                     {{ form.duration.errors }}
                                     {{ form.duration.label_tag }}
                                     <input type="text" name="duration" required="required" id="id_duration" class="form-control"
-                                           onblur="formatDurationInput(this)">
+                                           onblur="formatDurationInput(this)" value="{{ form.duration.value }}">
                                 </div>
+
                                 <div class="form-group">
                                     {{ form.date.errors }}
                                     {{ form.date.label_tag }}
-                                    {{ form.date }}
+{#                                    {{ form.date }}#}
+                                <vuejs-datepicker value="'{{form.date.value|date:'Y-m-d'}}'"
+                                                  name="date" bootstrap-styling
+                                                  format="yyyy-MM-dd"
+                                                  ></vuejs-datepicker>
                                 </div>
                                 <div class="form-group">
                                     {{ form.comment.errors }}

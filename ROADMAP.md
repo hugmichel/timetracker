@@ -12,7 +12,7 @@ ROADMAP
 ## User: enter date 
 - [x] MUST : I can enter a date. 
 - [x] MUST : Today is preselected. 
-- [ ] COULD : I can select the date with a datepicker.
+- [x] COULD : I can select the date with a datepicker.
 - [ ] COULD : I see the respective weekday as an abbreviation (Mon, Tue,...)
 - [ ] COULD : I have a "minus" button that selects the previous day.
 
@@ -42,16 +42,16 @@ Assumption: Number >10 is minutes, <=10 are hours
 # User: read/edit/delete
 - [x] MUST : I see a list of time entries which I have created. 
 - [x] MUST : I can delete individual entries.
-- [ ] COULD : I can edit individual entries.
+- [x] COULD : I can edit individual entries.
 
 # User: my total time
 - [x] MUST : I see the sum of my recorded times at the bottom of the list.
 - [ ] COULD : I can filter the list by day, week, month and year.
-- [ ] COULD : I can filter the list by project.
+- [x] COULD : I can filter the list by project.
 
 # Admin: see all user time records 
 - [x] MUST : An admin user sees all recorded times of all employees.
-- [ ] COULD : The admin user can also filter by employees.
+- [x] COULD : The admin user can also filter by employees.
 
 # Meta: Code repository 
 - [x] MUST : The project is handed over in a git repository.

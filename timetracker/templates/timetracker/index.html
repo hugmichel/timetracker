@@ -7,6 +7,19 @@
     </section>
     <div class="py-5 bg-light">
         <div class="container">
+            <form method="get" action="/" class="form-inline">
+                <div class="form-group">
+                    <label for="select-project" class="mr-3">Projects</label>
+                    <select class="form-control my-1 mr-sm-2" id="select-project" name="project_id">
+                        <option value="">Select a project</option>
+                        {% for project in projects %}
+                            <option value="{{ project.id }}"
+                                    {% if project.id == project_id %}selected{% endif %}>{{ project.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Filter</button>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -26,10 +39,15 @@
                         <td>{{ timeentry.id }}</td>
                         <td>{{ timeentry.project }}</td>
                         <td>{{ timeentry.date }}</td>
-                        <td><app-duration duration="{{ timeentry.duration }}"></app-duration></td>
+                        <td>
+                            <app-duration duration="{{ timeentry.duration }}"></app-duration>
+                        </td>
                         <td>{{ timeentry.comment }}</td>
-                        <td><a href="/remove/{{ timeentry.id }}"
-                               onclick="if (!confirm('confirm remove ?')) return false">Supprimer</a></td>
+                        <td>
+                            <a href="/edit/{{ timeentry.id }}">Edit</a> |
+                            <a href="/remove/{{ timeentry.id }}"
+                               onclick="if (!confirm('confirm remove ?')) return false">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

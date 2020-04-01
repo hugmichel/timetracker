@@ -26,4 +26,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('add/', views.TimeEntryCreateView.as_view(), name='add'),
     path('remove/<int:time_entry_id>', views.remove_time_entry, name='remove'),
+    path('edit/<int:time_entry_id>', views.TimeEntryUpdateView.as_view(), name='edit'),
 ]

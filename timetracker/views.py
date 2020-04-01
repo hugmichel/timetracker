@@ -1,3 +1,5 @@
+import math
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -6,7 +8,7 @@ from django.views import generic
 from django.views.generic import CreateView, FormView
 
 from timetracker.forms import TimeEntryForm
-from timetracker.models import TimeEntry
+from timetracker.models import TimeEntry, Project
 
 
 class IndexView(generic.ListView):
@@ -18,11 +20,17 @@ class IndexView(generic.ListView):
         if self.request.user.is_authenticated:
             user = self.request.user
         total = 0
-        all = TimeEntry.objects.filter(user=self.request.user)
-        for one in all:
-            total += one.duration
-        self.extra_context = {"total": total}
-        return TimeEntry.objects.filter(user=user).order_by('-id')
+
+        project_id = self.request.GET.get('project_id')
+        if project_id and len(project_id) > 0:
+            project_id = int(project_id)
+            time_entrys = TimeEntry.objects.filter(user=user, project_id=project_id)
+        else:
+            time_entrys = TimeEntry.objects.filter(user=user)
+        for time_entry in time_entrys:
+            total += time_entry.duration
+        self.extra_context = {"total": total, "project_id": project_id, "projects": Project.objects.all()}
+        return time_entrys.order_by('-id')
 
 
 class TimeEntryCreateView(FormView):
@@ -45,7 +53,36 @@ class TimeEntryCreateView(FormView):
         return super().form_valid(form)
 
 
+class TimeEntryUpdateView(FormView):
+    template_name = 'timetracker/timeentry_form.html'
+    form_class = TimeEntryForm
+    success_url = '/'
+
+    @property
+    def time_entry_id(self):
+        return self.kwargs['time_entry_id']
+
+    def get_initial(self):
+        time_entry = get_object_or_404(TimeEntry, pk=self.time_entry_id)
+        initial = super(TimeEntryUpdateView, self).get_initial()
+        hour = math.floor(time_entry.duration / 3600)
+        minutes = math.floor((time_entry.duration - (hour * 3600)) / 60)
+        initial.update({
+            "project": time_entry.project,
+            "user": time_entry.user,
+            "date": time_entry.date,
+            "duration": str(hour) + ':' + str(minutes),
+            "comment": time_entry.comment,
+        })
+        return initial
+
+    def form_valid(self, form):
+        form.save_timeentry(self.time_entry_id)
+        return super().form_valid(form)
+
+
 def remove_time_entry(request, time_entry_id):
-    time_entry = get_object_or_404(TimeEntry, pk=time_entry_id)  # , user=request.user
+    # TODO : check user permissions
+    time_entry = get_object_or_404(TimeEntry, pk=time_entry_id)
     time_entry.delete()
     return HttpResponseRedirect(reverse('index'))

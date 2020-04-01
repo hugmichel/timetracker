@@ -12,8 +12,11 @@ class TimeEntryForm(forms.Form):
     date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
     comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
 
-    def save_timeentry(self):
-        timeentry = TimeEntry()
+    def save_timeentry(self, timeentry_id=None):
+        if timeentry_id:
+            timeentry = TimeEntry.objects.get(pk=timeentry_id)
+        else:
+            timeentry = TimeEntry()
         timeentry.project = self.cleaned_data['project']
         timeentry.user = self.cleaned_data['user']
         hours, minutes = self.cleaned_data['duration'].split(':')
