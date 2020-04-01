@@ -14,7 +14,7 @@
                     <th>ID</th>
                     <th>Date</th>
                     <th>Project</th>
-                    <th>Duration in seconds</th>
+                    <th>Duration</th>
                     <th>Comment</th>
                     <th>Actions</th>
                 </tr>
@@ -26,13 +26,21 @@
                         <td>{{ timeentry.id }}</td>
                         <td>{{ timeentry.project }}</td>
                         <td>{{ timeentry.date }}</td>
-                        <td>{{ timeentry.duration }}</td>
+                        <td><app-duration duration="{{ timeentry.duration }}"></app-duration></td>
                         <td>{{ timeentry.comment }}</td>
                         <td><a href="/remove/{{ timeentry.id }}"
                                onclick="if (!confirm('confirm remove ?')) return false">Supprimer</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="7">
+                        Total time :
+                        <app-duration duration="{{ total }}"></app-duration>
+                    </td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </div>

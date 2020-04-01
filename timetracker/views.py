@@ -17,6 +17,11 @@ class IndexView(generic.ListView):
         user = None
         if self.request.user.is_authenticated:
             user = self.request.user
+        total = 0
+        all = TimeEntry.objects.filter(user=self.request.user)
+        for one in all:
+            total += one.duration
+        self.extra_context = {"total": total}
         return TimeEntry.objects.filter(user=user).order_by('-id')
 
 

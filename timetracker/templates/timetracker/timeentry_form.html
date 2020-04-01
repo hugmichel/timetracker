@@ -13,8 +13,33 @@
                         <div class="card-body">
                             <form method="POST">
                                 {% csrf_token %}
-                                {{ form }}
-                                <button type="submit">Save</button>
+                                <div class="form-group">
+                                    {{ form.project.errors }}
+                                    {{ form.project.label_tag }}
+                                    {{ form.project }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.user.errors }}
+                                    {{ form.user.label_tag }}
+                                    {{ form.user }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.duration.errors }}
+                                    {{ form.duration.label_tag }}
+                                    <input type="text" name="duration" required="required" id="id_duration" class="form-control"
+                                           onblur="formatDurationInput(this)">
+                                </div>
+                                <div class="form-group">
+                                    {{ form.date.errors }}
+                                    {{ form.date.label_tag }}
+                                    {{ form.date }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.comment.errors }}
+                                    {{ form.comment.label_tag }}
+                                    {{ form.comment }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save time entry</button>
                             </form>
                         </div>
                     </div>
@@ -22,4 +47,34 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {% verbatim %}
+    <script type="text/javascript">
+        function formatDurationInput(input) {
+            console.log(input.value, typeof input.value);
+            if (input.value.indexOf(':') !== -1) return;
+
+            let value = input.value;
+            let minutes = '';
+            let hours = '';
+            if (value > 10) {
+                // minutes
+                minutes = value % 60;
+                hours = Math.floor(value / 60);
+
+            } else {
+                // hours
+                minutes = 60 * (value % 1);
+                hours = Math.floor(value);
+            }
+            hours = '' + hours;
+            minutes = '' + minutes;
+            hours = hours.length < 2 ? '0' + hours : hours;
+            minutes = minutes.length < 2 ? '0' + minutes : minutes;
+            input.value = hours + ':' + minutes
+
+        }
+    </script>
+    {% endverbatim %}
 {% endblock %}

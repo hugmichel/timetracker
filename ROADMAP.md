@@ -25,7 +25,7 @@ ROADMAP
 
 # User: enter time
 - [x] MUST : I can enter the project time in an input field.
-- [ ] MUST : It automatically detects whether it is hours and/or minutes : 
+- [x] MUST : It automatically detects whether it is hours and/or minutes : 
 After I leave the field (onblur), my input is automatically formatted as hh:mm.
 Examples: 2 02:00, 8.5 08:30, 15 00:15, 150 02:30
 Assumption: Number >10 is minutes, <=10 are hours
@@ -45,7 +45,7 @@ Assumption: Number >10 is minutes, <=10 are hours
 - [ ] COULD : I can edit individual entries.
 
 # User: my total time
-- [ ] MUST : I see the sum of my recorded times at the bottom of the list.
+- [x] MUST : I see the sum of my recorded times at the bottom of the list.
 - [ ] COULD : I can filter the list by day, week, month and year.
 - [ ] COULD : I can filter the list by project.
 
